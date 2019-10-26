@@ -6,6 +6,13 @@
 		
 
 		public function indexAction() {
+			$db = DB::getInstance();
+			$fields = [
+				'fname' => 'Andries',
+				'lname' => 'Aphane',
+				'email' => 'andriesmaesela@gmail.com'
+			];
+			$contactsQ = $db->insert('contacts', $fields);
 			$this->view->render('home/index');
 		}
 	}
