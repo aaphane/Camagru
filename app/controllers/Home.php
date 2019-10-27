@@ -7,12 +7,11 @@
 
 		public function indexAction() {
 			$db = DB::getInstance();
-			$fields = [
-				'fname' => 'Andries',
-				'lname' => 'Aphane',
-				'email' => 'andriesmaesela@gmail.com'
-			];
-			$contactsQ = $db->insert('contacts', $fields);
+			$contacts = $db->findFirst('contacts', [
+				'conditions' => "lname = ?",
+				'bind' => ['Aphane'],
+			]);
+			dnd($contacts);
 			$this->view->render('home/index');
 		}
 	}
