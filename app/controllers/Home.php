@@ -6,12 +6,6 @@
 		
 
 		public function indexAction() {
-			$db = DB::getInstance();
-			$contacts = $db->findFirst('contacts', [
-				'conditions' => "lname = ?",
-				'bind' => ['Aphane'],
-			]);
-			// /dnd($contacts);
 			$this->view->render('home/index');
 		}
 	}
