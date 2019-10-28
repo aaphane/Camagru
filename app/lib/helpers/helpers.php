@@ -8,5 +8,5 @@
 	}
 
 	function sanitize($dirtyVal) {
-		return htmlentities($dirtyVal, ENT_QUOTES, 'UTF-8');
+		return htmlentities($dirtyVal, ENT_QUOTES, 'UTF-8'); 
 	}

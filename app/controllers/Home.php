@@ -11,7 +11,7 @@
 				'conditions' => "lname = ?",
 				'bind' => ['Aphane'],
 			]);
-			// dnd($contacts);
+			// /dnd($contacts);
 			$this->view->render('home/index');
 		}
 	}

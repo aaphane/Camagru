@@ -15,7 +15,7 @@
 			$columns = $this->get_columns();
 			foreach($columns as $column) {
 			$this->_columnNames[]=$column->Field;
-			$this->{$columnName} = null;
+			$this->{$columnNames} = null;
 			}
 		}
 
