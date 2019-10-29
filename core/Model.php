@@ -14,8 +14,9 @@
 		protected function _setTableColumns() {
 			$columns = $this->get_columns();
 			foreach($columns as $column) {
+			$columnName = $column->Field;
 			$this->_columnNames[]=$column->Field;
-			$this->{$columnNames} = null;
+			$this->{$columnName} = null;
 			}
 		}
 
@@ -35,9 +36,11 @@
 		}
 
 		public function findFirst($params = []) {
-		$resultsQuery = $this->_db->findFirst($this->_table, $params);
+		$resultQuery = $this->_db->findFirst($this->_table, $params);
 		$result = new $this->_modelName($this->_table);
-		$result->populateObjectData($resultQuery);
+		if($resultQuery) {
+			$result->populateObjectData($resultQuery);
+		}
 		return $result;
 		}
 
