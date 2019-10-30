@@ -32,7 +32,7 @@
 		public static function currentLoggedInUser() {
 				if(!isset(self::$currentLoggedInUser) && Session::exists(CURRENT_USER_SESSION_NAME)) {
 						$U = new Users((int)Session::get(CURRENT_USER_SESSION_NAME));
-						self::$currentLoggedInUser = $u;
+						self::$currentLoggedInUser = $U;
 			}
 			return self::$currentLoggedInUser;
 		}
