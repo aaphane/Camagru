@@ -23,18 +23,26 @@
 						'min' => 6
 					]
 				]);
-				if($validation === true) {
+				if($validation->passed()) {
 					$user = $this->UsersModel->findByUsername($_POST['username']);
+					echo "121433";
 					if($user && password_verify(Input::get('password'), $user->password) ) {
 						$remember = (isset($_POST['remeber_me']) && Input::get('remember_me')) ? true : false;
 						$user->login($remember);
 						Router::redirect('');
 					}
-			} else {
-				$validation->addError("There is an error with your username or password");
-			}
-			}
+				}
+					} else {
+					$validation->addError("There is an error with your username or password");
+				}
 			$this->view->displayErrors = $validation->displayErrors();
 			$this->view->render('register/login');
 		}
+	public function logoutAction()
+	{
+		if (currentUser()) {
+			currentUser()->logout();
+		}
+		Router::redirect('register/login');
+	}
 	}
