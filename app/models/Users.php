@@ -38,7 +38,6 @@
 		}
 
 		public function login($rememberMe=false) {
-			echo "12365754323456";
 			Session::set($this->_sessionName, $this->id);
 			if($rememberMe) {
 				$hash = md5(uniqid() + rand(0, 100));
@@ -48,6 +47,21 @@
 				$this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
 				$this->_db->insert('user_sessions', $fields);
 			}
+		}
+
+		public static function loginUserFromCookie() {
+			$userSession = UserSessions::getFromCookie();
+			dnd($userSession);
+			$user_session_model = new UserSessions();
+			$user_session = $user_session_model->findFirst([
+				'conditions' => "user_agent = ? AND session = ?",
+				'bind' => [Session::uagent_no_version(), Cookie::get(REMEMBER_ME_COOKIE_NAME)]
+			]);
+			if($user_session->user_id != '') {
+				$user = new self($user_session->user_id);
+			}
+			$user->login();
+			return $user;
 		}
 		
 		public function logout() {

@@ -27,7 +27,6 @@
 					$user = $this->UsersModel->findByUsername($_POST['username']);
 					if($user && password_verify(Input::get('password'), $user->password) ) {
 						$remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
-						echo $remember;
 						$user->login($remember);
 						Router::redirect('');
 					}
