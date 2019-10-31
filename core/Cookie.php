@@ -16,7 +16,7 @@
 		return $_COOKIE[$name];
 	}
 
-	public function exists($name) {
+	public static function exists($name) {
 		return isset($_COOKIE[$name]);
 	}
 }

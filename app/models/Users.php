@@ -51,27 +51,32 @@
 
 		public static function loginUserFromCookie() {
 			$userSession = UserSessions::getFromCookie();
-			dnd($userSession);
-			$user_session_model = new UserSessions();
-			$user_session = $user_session_model->findFirst([
-				'conditions' => "user_agent = ? AND session = ?",
-				'bind' => [Session::uagent_no_version(), Cookie::get(REMEMBER_ME_COOKIE_NAME)]
-			]);
-			if($user_session->user_id != '') {
-				$user = new self($user_session->user_id);
+			if($userSession->user_id != '') {
+				$user = new self((int)$userSession->user_id);
 			}
-			$user->login();
+			if($user)
+			{
+				$user->login();
+			}
 			return $user;
 		}
 		
 		public function logout() {
-			$user_agent = Session::uagent_no_version();
-			$this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?",[$this->id, $user_agent]);
+			$userSession = UserSessions::getFromCookie();
+			//if($userSession) $userSession->delete();
+			Cookie::delete($userSession);
 			Session::delete(CURRENT_USER_SESSION_NAME);
 			if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
 				Cookie::delete(REMEMBER_ME_COOKIE_NAME);
 			}
 			self::$currentLoggedInUser = null;
 			return true;
+		}
+
+
+		public function registerNewUser($params) {
+			$this->assign($params);
+			$this->password = password_hash($this->password, PASSWORD_DEFAULT);
+			$this->save();
 		}
 	}
