@@ -16,6 +16,9 @@
 </head>
 
 <body>
+	 <?php include 'main_menu.php' ?>
+	<div class="container-fluid" style="min-height:cal(100% - 125px);">
+</div>
 	<?= $this->content('body'); ?>
 </body>
 

@@ -13,6 +13,7 @@ define('DEFAULT_LAYOUT', 'default'); //if no layout is set in the controller, us
 define('PROOT', '/camagru/'); // set this to '/' for a live server.
 
 define('SITE_TITLE', 'Framework ya mapara'); //This will be used if no site title is set
+define('MENU_BRAND', 'STUFF_SA_MAPARA');
 
 define('CURRENT_USER_SESSION_NAME', '123maparaAjazz'); //session name for logged in user
 define('REMEMBER_ME_COOKIE_NAME', 'NtjayaGame'); //cookie name for logged in user
