@@ -3,8 +3,8 @@
 <?php $this->start('body'); ?>
 <div class="col-md-6 col-md-offset-3 well">
 	<form class="form" action="<?= PROOT ?>register/login" method="post">
-	<div class="bg-danger"><?=$this->displayErrors ?></div>
-	<H3 class="text-center">Log In</H3>
+		<div class="bg-danger"><?= $this->displayErrors ?></div>
+		<H3 class="text-center">Log In</H3>
 		<div class="form-group">
 			<label for="username">Username</label>
 			<input type="text" name="username" id="username" class="form-control">
@@ -20,7 +20,10 @@
 			<input type="submit" value="Login" class="btn btn-large btn-primary">
 		</div>
 		<div class="text-right">
-			<a href="<?=PROOT?>register/register" class="text-primary">Register</a>
+			<a href="<?=PROOT ?>register/register" class="text-primary">Register</a>
+		</div>
+		<div class="text-left">
+			<a href="<?=PROOT ?>register/forgot" class="text-primary">Forgot Password?</a>
 		</div>
 	</form>
 </div>

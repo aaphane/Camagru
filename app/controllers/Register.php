@@ -97,4 +97,34 @@
 		$this->view->displayErrors = $validation->displayErrors();
 		$this->view->render('register/register');
 	}
+
+
+	public function forgotAction()
+	{
+		$validation = new Validate();
+		$posted_values = ['fname' => '', 'lname' => '', 'username' => '', 'email' => '', 'password' => '', 'confirm' => ''];
+		if ($_POST) {
+			$posted_values = posted_values($_POST);
+			$validation->check($_POST, [
+
+				'email' => [
+					'display' => 'Email',
+					'required' => true,
+					'unique' => 'users',
+					'max' => 100,
+					'valid_email' => true
+
+				],
+			]);
+
+			if ($validation->passed()) {
+				$newUser = new Users();
+				$newUser->registerNewUser($_POST);
+				Router::redirect('register/login');
+			}
+		}
+		$this->view->post = $posted_values;
+		$this->view->displayErrors = $validation->displayErrors();
+		$this->view->render('register/forgot');
+	}
 	}
